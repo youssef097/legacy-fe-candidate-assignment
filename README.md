@@ -61,3 +61,4 @@ Build a full-stack Web3 app that allows a user to:
 | **Code quality** | Readability, organization, error handling, TypeScript use |
 | **User experience** | Clear flows, responsive feedback, intuitive UI |
 | **Extensibility** | Evidence of scalable thought (e.g., room for auth, roles, message types) |
+| **Design** | Beautiful UX design skills are important to us. Make the app look and feel great |
