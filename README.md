@@ -3,7 +3,7 @@ React + Dynamic.xyz Headless Implementation (Frontend) | Node.js + Express (Back
 
 ## 🎯 Objective
 Build a full-stack Web3 app that allows a user to:
-1. Authenticate using a **Dynamic.xyz embedded wallet headless implementation https://docs.dynamic.xyz/headless/headless-email**
+1. Authenticate using a **Dynamic.xyz embedded wallet headless implementation https://docs.dynamic.xyz/headless/headless-email** ⚠️ Do not simply implement the Widget ⚠️
 2. Enter and **sign a custom message** of the user's choosing
 3. Send the signed message to a **Node.js + Express** backend
 4. Backend verifies the signature and responds with validity + address
