@@ -28,10 +28,10 @@
       "@hooks/*": ["./src/hooks/*"],
       "@services/*": ["./src/services/*"],
       "@context/*": ["./src/context/*"],
+      "@types": ["./src/types/index.ts"],
       "@types/*": ["./src/types/*"],
       "@utils/*": ["./src/utils/*"],
-      "@config": ["./src/config.ts"],
-      "@shared/*": ["../shared/src/*"]
+      "@config": ["./src/config.ts"]
     }
   },
   "include": ["src"],

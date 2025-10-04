@@ -15,7 +15,6 @@
     "clean": "rm -rf dist node_modules/.vite"
   },
   "dependencies": {
-    "@web3-signer/shared": "file:../shared",
     "axios": "^1.6.2",
     "clsx": "^2.0.0",
     "framer-motion": "^12.23.22",

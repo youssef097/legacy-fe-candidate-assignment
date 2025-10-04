@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { useDynamicContext, useConnectWithOtp } from '@dynamic-labs/sdk-react-core'
-import type { WalletConnectionState } from '@web3-signer/shared'
+import type { WalletConnectionState } from '@types'
 import { EmailAuthModal } from '@components/wallet/EmailAuthModal'
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined)

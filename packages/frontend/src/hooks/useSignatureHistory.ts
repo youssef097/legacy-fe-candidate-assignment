@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import type { SignedMessage } from '@web3-signer/shared'
+import type { SignedMessage } from '@types'
 
 const STORAGE_KEY = 'signedMessages'
 
