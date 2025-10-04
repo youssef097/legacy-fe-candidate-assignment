@@ -1,4 +1,3 @@
-# Render Blueprint for Backend Deployment
 services:
   - type: web
     name: web3-signer-api
@@ -12,5 +11,5 @@ services:
       - key: PORT
         generateValue: true
       - key: CORS_ORIGIN
-        sync: false # Set this manually in Render dashboard
+        sync: false 
 

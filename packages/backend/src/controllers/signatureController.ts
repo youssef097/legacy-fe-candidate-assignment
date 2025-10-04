@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import { signatureService } from '@services/signatureService'
-import type { SignatureVerificationRequest, SignatureVerificationResponse } from '@web3-signer/shared'
+import type { SignatureVerificationRequest, SignatureVerificationResponse } from '../types'
 
 /**
  * Signature verification controller

@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import type { SignatureVerificationRequest, SignatureVerificationResponse, MessageType } from '@web3-signer/shared'
+import type { SignatureVerificationRequest, SignatureVerificationResponse, MessageType } from '../types'
 
 /**
  * Signature verification service
