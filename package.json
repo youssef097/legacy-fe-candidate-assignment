@@ -1,0 +1,39 @@
+{
+  "name": "web3-wallet-signer-monorepo",
+  "version": "1.0.0",
+  "description": "Web3 Message Signer & Verifier with Dynamic.xyz",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "npm run dev --workspace=@web3-signer/frontend",
+    "dev:backend": "npm run dev --workspace=@web3-signer/backend",
+    "build": "npm run build --workspaces",
+    "build:frontend": "npm run build --workspace=@web3-signer/frontend",
+    "build:backend": "npm run build --workspace=@web3-signer/backend",
+    "test": "npm run test --workspaces",
+    "test:frontend": "npm run test --workspace=@web3-signer/frontend",
+    "test:backend": "npm run test --workspace=@web3-signer/backend",
+    "lint": "npm run lint --workspaces",
+    "lint:frontend": "npm run lint --workspace=@web3-signer/frontend",
+    "lint:backend": "npm run lint --workspace=@web3-signer/backend",
+    "type-check": "npm run type-check --workspaces",
+    "clean": "npm run clean --workspaces && rm -rf node_modules",
+    "install:all": "npm install && npm install --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "dependencies": {
+    "@dynamic-labs/ethereum": "^4.36.0",
+    "@dynamic-labs/sdk-react-core": "^4.36.0",
+    "viem": "^2.37.12"
+  }
+}
