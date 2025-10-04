@@ -15,14 +15,14 @@
     "clean": "rm -rf dist node_modules/.vite"
   },
   "dependencies": {
-
     "@web3-signer/shared": "file:../shared",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.1",
     "axios": "^1.6.2",
     "clsx": "^2.0.0",
-    "lucide-react": "^0.294.0"
+    "framer-motion": "^12.23.22",
+    "lucide-react": "^0.294.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
