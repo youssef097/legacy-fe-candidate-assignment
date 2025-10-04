@@ -2,6 +2,12 @@
 
 A full-stack Web3 application for signing and verifying messages using Dynamic.xyz embedded wallets.
 
+## 🌐 Live Demo
+
+- **Backend API**: [https://legacy-fe-candidate-assignment-backend-lzlt4fue8.vercel.app/](https://legacy-fe-candidate-assignment-backend-lzlt4fue8.vercel.app/)
+
+> **Note**: The backend is hosted on a free tier and may experience slower response times or cold starts.
+
 ## 🚀 [Deployment Guide](./DEPLOYMENT.md)
 
 See the [complete deployment guide](./DEPLOYMENT.md) for step-by-step instructions on deploying to production (Vercel for frontend, Render for backend).
@@ -478,14 +484,9 @@ router.post('/verify', authenticate, authorize(['user']), validateRequest, audit
   - Repository pattern allows mock implementations
   - Controller/Service/Repository layers testable independently
 
-## 🤝 Contributing
+## ⚖️ Trade-offs & Considerations
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests and linting
-5. Submit a pull request
+### Deployment
+- **Backend on Render Free Tier**: The backend is deployed on Render's free tier, which may experience slower response times and cold starts after periods of inactivity. For production use, consider upgrading to a paid tier for better performance and reliability.
 
-## 📄 License
 
-This project is licensed under the MIT License.
