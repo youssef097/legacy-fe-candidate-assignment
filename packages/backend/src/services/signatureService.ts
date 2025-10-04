@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import type { SignatureVerificationRequest, SignatureVerificationResponse, MessageType } from '../types'
+import type { SignatureVerificationRequest, SignatureVerificationResponse, MessageType } from '../types/index.js'
 
 /**
  * Signature verification service

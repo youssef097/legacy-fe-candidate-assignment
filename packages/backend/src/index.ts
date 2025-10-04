@@ -5,8 +5,8 @@ import morgan from 'morgan'
 import compression from 'compression'
 import rateLimit from 'express-rate-limit'
 import dotenv from 'dotenv'
-import { signatureRoutes } from '@routes/signatureRoutes'
-import { errorHandler, notFoundHandler } from '@middleware/errorHandler'
+import { signatureRoutes } from './routes/signatureRoutes.js'
+import { errorHandler, notFoundHandler } from './middleware/errorHandler.js'
 
 dotenv.config()
 

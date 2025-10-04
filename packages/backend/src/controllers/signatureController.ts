@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
-import { signatureService } from '@services/signatureService'
-import type { SignatureVerificationRequest, SignatureVerificationResponse } from '../types'
+import { signatureService } from '../services/signatureService.js'
+import type { SignatureVerificationRequest, SignatureVerificationResponse } from '../types/index.js'
 
 /**
  * Signature verification controller
