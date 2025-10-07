@@ -402,31 +402,45 @@ interface User { address, role, email, metadata }
 ```
 
 ### 🔐 **Multi-Factor Authentication (MFA)**
-- **Current:** Email OTP via Dynamic.xyz headless auth with custom UI
+- **Current:** ✅ **FULLY IMPLEMENTED** - TOTP MFA with custom headless UI
+  - Email OTP via Dynamic.xyz headless auth with custom UI
+  - **TOTP authenticator app support** (Google Authenticator, Authy, etc.)
+  - **Account-based MFA** (protects all logins)
+  - **QR code + manual secret** for device setup
+  - **Backup recovery codes** for account recovery
+  - **Device management** via custom UI
+  - **Automatic MFA flow handling** during login
+
 - **Ready for:**
-  - TOTP (authenticator apps like Google Authenticator)
   - Passkeys (biometric authentication)
-  - Account-based MFA (protect all logins)
   - Action-based MFA (protect sensitive operations like signing)
+  - SMS backup authentication
 
 ```typescript
-// MFA settings in User interface
-interface User {
-  mfa?: {
-    enabled: boolean;
-    methods: ('totp' | 'passkey')[];
-    requiredForActions?: ('sign' | 'transfer' | 'export')[];
-  };
-}
-// WalletContext documents MFA integration in signMessage function
-// Custom modal pattern (EmailAuthModal) extends to MFAModal
+// Fully implemented MFA with custom UI
+import { useMFA } from '@/hooks/useMFA'
+import { MFAModal } from '@components/wallet/MFAModal'
+
+const {
+  devices,              // List of registered MFA devices
+  addDevice,            // Start TOTP device registration
+  verifyDevice,         // Verify OTP code
+  openModal,            // Open MFA settings
+  backupCodes,          // Recovery codes
+  hasMFAEnabled,        // Check MFA status
+} = useMFA()
+
+// WalletContext integration
+const { openMFASettings, hasMFAEnabled } = useWallet()
 ```
 
-**Integration Path:**
-- Dynamic.xyz provides `usePromptMfaAuth` and `useTotpAuth` hooks
-- Custom `MFAModal` component follows existing `EmailAuthModal` pattern
-- Action-based MFA wraps `signMessage` function: check if required → prompt → sign
-- Estimated implementation: 10-14 hours
+**Implementation Details:**
+- Custom `MFAModal` component with 4 views: devices, QR code, OTP input, backup codes
+- `useMFA` hook for complete MFA state management
+- Integrated with `WalletContext` for seamless user experience
+- Auto-triggers during login via `useSyncMfaFlow`
+- Prevention of modal spam with ref-based guards
+- See [MFA_GUIDE.md](./MFA_GUIDE.md) for complete documentation
 
 ### 📝 **Message Type System**
 - **Current:** Simple message signing

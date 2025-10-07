@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Wallet, FileText, History, ArrowRight, Sparkles } from 'lucide-react'
+import { Wallet, FileText, History, ArrowRight, Sparkles, Shield } from 'lucide-react'
 import { useWallet } from '@context/WalletContext'
 import { PageTransition } from '@components/ui/PageTransition'
 
 export const HomePage: React.FC = () => {
-  const { connectionState, address, connect } = useWallet()
+  const { connectionState, address, connect, openMFASettings, hasMFAEnabled } = useWallet()
 
   const features = [
     {
@@ -47,14 +47,34 @@ export const HomePage: React.FC = () => {
           <span className="font-medium text-gray-900 dark:text-white">Secure, simple, and decentralized.</span>
         </p>
 
-        <div>
+        <div className="space-y-4">
           {connectionState === 'connected' && address ? (
-            <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/10 dark:bg-gray-900/30 backdrop-blur-lg shadow-lg border border-gray-200/20 dark:border-gray-700/30">
-              <Wallet className="h-5 w-5 mr-3 text-green-600 dark:text-green-400" />
-              <span className="text-sm font-medium text-green-600 dark:text-green-400">
-                Connected: {address.slice(0, 6)}...{address.slice(-4)}
-              </span>
-            </div>
+            <>
+              <div className="inline-flex items-center px-6 py-3 rounded-full bg-white/10 dark:bg-gray-900/30 backdrop-blur-lg shadow-lg border border-gray-200/20 dark:border-gray-700/30">
+                <Wallet className="h-5 w-5 mr-3 text-green-600 dark:text-green-400" />
+                <span className="text-sm font-medium text-green-600 dark:text-green-400">
+                  Connected: {address.slice(0, 6)}...{address.slice(-4)}
+                </span>
+              </div>
+              
+              {/* MFA Settings Button */}
+              <div className="flex justify-center">
+                <button
+                  onClick={openMFASettings}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-full border border-gray-200/50 dark:border-gray-700/50 hover:border-primary-400/50 dark:hover:border-primary-600/50 transition-all shadow-sm hover:shadow-md"
+                >
+                  <Shield className={`h-4 w-4 ${hasMFAEnabled ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'}`} />
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {hasMFAEnabled ? 'MFA Enabled' : 'Enable MFA'}
+                  </span>
+                  {hasMFAEnabled && (
+                    <span className="px-2 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-medium rounded-full">
+                      Active
+                    </span>
+                  )}
+                </button>
+              </div>
+            </>
           ) : (
             <button
               onClick={connect}
@@ -103,6 +123,7 @@ export const HomePage: React.FC = () => {
         <div className="space-y-4">
           {[
             'Connect your wallet using Dynamic.xyz embedded wallet',
+            'Enable Multi-Factor Authentication (MFA) for enhanced security',
             'Navigate to the Sign Message page to create your first signature',
             'View your signature history and verification results'
           ].map((step, index) => (

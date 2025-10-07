@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { useDynamicContext, useConnectWithOtp } from '@dynamic-labs/sdk-react-core'
 import type { WalletConnectionState } from '@types'
 import { EmailAuthModal } from '@components/wallet/EmailAuthModal'
+import { MFAModal } from '@components/wallet/MFAModal'
+import { useMFA } from '@/hooks/useMFA'
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined)
 
@@ -12,6 +14,8 @@ export interface WalletContextType {
   connect: () => void
   disconnect: () => Promise<void>
   error: string | null
+  openMFASettings: () => void
+  hasMFAEnabled: boolean
 }
 
 interface WalletProviderProps {
@@ -28,6 +32,23 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
   } = useDynamicContext()
 
   const { connectWithEmail, verifyOneTimePassword } = useConnectWithOtp()
+
+  const {
+    devices: mfaDevices,
+    addDevice: addMfaDevice,
+    verifyDevice: verifyMfaDevice,
+    deleteDevice: deleteMfaDevice,
+    refreshDevices: refreshMfaDevices,
+    isModalOpen: isMfaModalOpen,
+    openModal: openMfaModal,
+    closeModal: closeMfaModal,
+    mfaRegisterData,
+    currentView: mfaView,
+    setCurrentView: setMfaView,
+    backupCodes,
+    acknowledgeBackupCodes,
+    error: mfaError
+  } = useMFA()
 
   const [connectionState, setConnectionState] = useState<WalletConnectionState>('disconnected')
   const [error, setError] = useState<string | null>(null)
@@ -107,6 +128,10 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
     }
 
     try {
+      // Note: For action-based MFA, you would check here if MFA is required
+      // and prompt for verification before signing. This example uses account-based MFA
+      // which is handled during login by the useSyncMfaFlow hook.
+      
       const signature = await primaryWallet.signMessage(message)
       if (!signature) {
         throw new Error('Failed to generate signature')
@@ -117,18 +142,31 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
     }
   }
 
+  /**
+   * Open MFA settings modal
+   * Allows users to manage their MFA devices
+   */
+  const openMFASettings = () => {
+    openMfaModal()
+  }
+
   const contextValue: WalletContextType = {
     connectionState,
     address: (user?.verifiedCredentials?.[0]?.address as string) || null,
     signMessage,
     connect,
     disconnect,
-    error
+    error,
+    // MFA functionality
+    openMFASettings,
+    hasMFAEnabled: mfaDevices.length > 0
   }
 
   return (
     <WalletContext.Provider value={contextValue}>
       {children}
+      
+      {/* Email authentication modal */}
       <EmailAuthModal
         isOpen={isAuthModalOpen}
         onClose={handleCloseAuthModal}
@@ -136,6 +174,23 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
         onVerificationSubmit={handleVerificationSubmit}
         authStep={authStep}
         error={error}
+      />
+      
+      {/* MFA management modal */}
+      <MFAModal
+        isOpen={isMfaModalOpen}
+        onClose={closeMfaModal}
+        devices={mfaDevices}
+        onAddDevice={addMfaDevice}
+        onDeleteDevice={deleteMfaDevice}
+        onRefreshDevices={refreshMfaDevices}
+        onVerifyDevice={verifyMfaDevice}
+        backupCodes={backupCodes}
+        onAcknowledgeBackupCodes={acknowledgeBackupCodes}
+        mfaRegisterData={mfaRegisterData}
+        currentView={mfaView}
+        onViewChange={setMfaView}
+        error={mfaError}
       />
     </WalletContext.Provider>
   )
