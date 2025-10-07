@@ -4,9 +4,10 @@ A full-stack Web3 application for signing and verifying messages using Dynamic.x
 
 ## 🌐 Live Demo
 
+- **Frontend App**: [https://legacy-fe-candidate-assignment-back.vercel.app/](https://legacy-fe-candidate-assignment-back.vercel.app/)
 - **Backend API**: [https://legacy-fe-candidate-assignment-backend-lzlt4fue8.vercel.app/](https://legacy-fe-candidate-assignment-backend-lzlt4fue8.vercel.app/)
 
-> **Note**: The backend is hosted on a free tier and may experience slower response times or cold starts.
+> **Note**: The services are hosted on free tiers and may experience slower response times or cold starts.
 
 ## 🚀 [Deployment Guide](./DEPLOYMENT.md)
 
