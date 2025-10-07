@@ -35,6 +35,8 @@ describe('SignPage', () => {
     connect: vi.fn(),
     disconnect: vi.fn(),
     error: null,
+    openMFASettings: vi.fn(),
+    hasMFAEnabled: false,
   }
 
   const mockUseSignatureHistory = {
